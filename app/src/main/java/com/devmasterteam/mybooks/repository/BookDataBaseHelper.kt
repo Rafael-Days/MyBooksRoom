@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.devmasterteam.mybooks.entity.BookEntity
 import com.devmasterteam.mybooks.helper.DataBaseConstants
-
+/*
 class BookDataBaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -96,3 +96,4 @@ class BookDataBaseHelper(context: Context) :
         """
     }
 }
+*/
