@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.devmasterteam.mybooks.entity.BookEntity
 import com.devmasterteam.mybooks.repository.BookRepository
 
@@ -12,15 +13,8 @@ class FavoriteViewModel(application: Application) : AndroidViewModel(application
     // Acesso a dados
     private val repository = BookRepository.getInstance(application.applicationContext)
 
-    private val _bookList = MutableLiveData<List<BookEntity>>()
-    val bookList: LiveData<List<BookEntity>> = _bookList
-
-    /**
-     * Busca livros favoritos
-     * */
-    fun getFavorites() {
-        _bookList.value = repository.getFavoriteBooks()
-    }
+    //busca os favoritos
+    val bookList: LiveData<List<BookEntity>> = repository.getFavoriteBooks().asLiveData()
 
     /**
      * Atualiza boolean de favorito
@@ -28,9 +22,6 @@ class FavoriteViewModel(application: Application) : AndroidViewModel(application
     fun favorite(bookId: Int) {
         // Atualiza boolean de favorito
         repository.toggleFavoriteStatus(bookId)
-
-        // Atualiza listagem para refletir as mudanças
-        getFavorites()
     }
 
 }

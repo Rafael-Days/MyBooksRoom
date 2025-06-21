@@ -42,11 +42,6 @@ class FavoriteFragment : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getFavorites()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
