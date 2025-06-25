@@ -55,14 +55,14 @@ class BookRepository private constructor(context: Context) {
     /**
      * Busca um livro pelo ID.
      */
-    fun getBookById(id: Int): BookEntity {
+    suspend fun getBookById(id: Int): BookEntity {
         return dataBase.getBookById(id)
     }
 
     /**
      * Alterna entre true e false o atributo 'favorite'
      * */
-    fun toggleFavoriteStatus(id: Int) {
+    suspend fun toggleFavoriteStatus(id: Int) {
         val book = getBookById(id)
         book.favorite = !book.favorite
         dataBase.update(book)
@@ -71,7 +71,7 @@ class BookRepository private constructor(context: Context) {
     /**
      * Remove um livro pelo ID
      * */
-    fun deleteBook(id: Int): Boolean {
+    suspend fun deleteBook(id: Int): Boolean {
         return dataBase.delete(book = getBookById(id)) > 0
     }
 }

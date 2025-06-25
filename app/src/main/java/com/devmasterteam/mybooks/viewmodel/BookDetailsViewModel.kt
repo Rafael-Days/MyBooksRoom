@@ -4,8 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.devmasterteam.mybooks.entity.BookEntity
 import com.devmasterteam.mybooks.repository.BookRepository
+import kotlinx.coroutines.launch
 
 class BookDetailsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -24,21 +26,27 @@ class BookDetailsViewModel(application: Application) : AndroidViewModel(applicat
      * Carrega livro do repositório
      * */
     fun getBook(bookId: Int) {
-        _book.value = repository.getBookById(bookId)
+        viewModelScope.launch {
+            _book.value = repository.getBookById(bookId)
+        }
     }
 
     /**
      * Atualiza boolean de favorito
      * */
     fun favorite(bookId: Int) {
-        repository.toggleFavoriteStatus(bookId)
+        viewModelScope.launch {
+            repository.toggleFavoriteStatus(bookId)
+        }
     }
 
     /**
      * Faz a remoção do libro por ID
      * */
     fun delete(bookId: Int) {
-        _bookDeleted.value = repository.deleteBook(bookId)
+        viewModelScope.launch {
+            _bookDeleted.value = repository.deleteBook(bookId)
+        }
     }
 
 }

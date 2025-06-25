@@ -5,8 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.devmasterteam.mybooks.entity.BookEntity
 import com.devmasterteam.mybooks.repository.BookRepository
+import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -20,8 +22,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
      * Atualiza boolean de favorito
      * */
     fun favorite(bookId: Int) {
-        // Atualiza boolean de favorito
-        repository.toggleFavoriteStatus(bookId)
+
+        viewModelScope.launch {
+            // Atualiza boolean de favorito
+            repository.toggleFavoriteStatus(bookId)
+        }
     }
 
 }
